@@ -1,0 +1,14 @@
+data/
+checkpoints/
+__pycache__/
+*.pyc
+*.pth
+*.pt
+.env
+docs
+REPORT.md
+project-spec.md
+
+# keep top-level results plots; skip generated per-run outputs
+results/gradcam/
+results/predictions/
