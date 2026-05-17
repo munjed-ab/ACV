@@ -12,3 +12,5 @@ project-spec.md
 # keep top-level results plots; skip generated per-run outputs
 results/gradcam/
 results/predictions/
+#huggingface repo
+ACV-SynthSentinel
