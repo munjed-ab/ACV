@@ -1,4 +1,4 @@
-# SynthSentinel — AI-Generated Image Detection using CNNs
+# SynthSentinel: AI-Generated Image Detection using CNNs
 
 Binary classifier (REAL / FAKE) trained on CIFAKE dataset. Compares custom CNN baseline vs. fine-tuned ResNet50, with Grad-CAM visualization for model interpretability.
 
@@ -8,17 +8,17 @@ Binary classifier (REAL / FAKE) trained on CIFAKE dataset. Compares custom CNN b
 
 | Item | Detail |
 |------|--------|
-| Dataset | CIFAKE — 120,000 images (60k REAL from CIFAR-10, 60k FAKE from Stable Diffusion v1.4) |
+| Dataset | CIFAKE: 120,000 images (60k REAL from CIFAR-10, 60k FAKE from Stable Diffusion v1.4) |
 | Task | Binary classification: REAL vs. FAKE |
 | Image size | 32×32 RGB, 10 categories |
 | Tools | Python, PyTorch, torchvision, scikit-learn, matplotlib |
 
 **Methodology (as submitted to professor):**
 1. Data preprocessing and normalization
-2. Custom CNN — trained from scratch as baseline
-3. ResNet50 — fine-tuned via transfer learning
+2. Custom CNN: trained from scratch as baseline
+3. ResNet50: fine-tuned via transfer learning
 4. Comparison using Accuracy, F1-Score, and Confusion Matrix
-5. Grad-CAM — visualize where each model "looks" to make decisions
+5. Grad-CAM: visualize where each model "looks" to make decisions
 
 ---
 
@@ -49,7 +49,7 @@ project/
 
 Transfer learning improved accuracy by **+3.3%** over the from-scratch baseline.
 
-### Baseline CNN — Detailed
+### Baseline CNN
 
 ```
               precision    recall  f1-score   support
@@ -61,11 +61,11 @@ Transfer learning improved accuracy by **+3.3%** over the from-scratch baseline.
    macro avg       0.95      0.95      0.95     20000
 ```
 
-- Strong FAKE precision (0.97) — low false alarm rate
-- Slight asymmetry: FAKE recall 0.92 vs REAL recall 0.97 — misses some AI-generated images
+- Strong FAKE precision (0.97), low false alarm rate
+- Slight asymmetry: FAKE recall 0.92 vs REAL recall 0.97, misses some AI-generated images
 - Trained from scratch in 19 epochs, converged fast
 
-### ResNet50 (Transfer Learning) — Detailed
+### ResNet50 (Transfer Learning)
 
 ```
               precision    recall  f1-score   support
@@ -77,21 +77,21 @@ Transfer learning improved accuracy by **+3.3%** over the from-scratch baseline.
    macro avg       0.98      0.98      0.98     20000
 ```
 
-- Perfectly balanced — 0.98 precision/recall on both classes
+- Perfectly balanced, 0.98 precision/recall on both classes
 - Fixed the baseline's asymmetry completely
 - Backbone frozen for first 5 epochs, unfrozen at lower LR (3e-5) afterward
-- Final train loss: 0.026 — very confident predictions
+- Final train loss: 0.026, very confident predictions
 - ImageNet texture features transfer well even at 32×32; Stable Diffusion leaves detectable texture artifacts
 
 ### Plots
 
 Saved to `results/`:
-- `baseline_cnn_curves.png` — loss & accuracy over epochs
-- `baseline_cnn_confusion.png` — confusion matrix
-- `resnet50_curves.png` — loss & accuracy over epochs
-- `resnet50_confusion.png` — confusion matrix
-- `gradcam/baseline_cnn_sample_0..4.png` — Grad-CAM overlays
-- `gradcam/resnet50_sample_0..4.png` — Grad-CAM overlays
+- `baseline_cnn_curves.png`: loss & accuracy over epochs
+- `baseline_cnn_confusion.png`: confusion matrix
+- `resnet50_curves.png`: loss & accuracy over epochs
+- `resnet50_confusion.png`: confusion matrix
+- `gradcam/baseline_cnn_sample_0..4.png`: Grad-CAM overlays
+- `gradcam/resnet50_sample_0..4.png`: Grad-CAM overlays
 
 ---
 

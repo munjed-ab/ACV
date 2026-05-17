@@ -1,5 +1,5 @@
 """
-app.py — Gradio Space for SynthSentinel AI image detector.
+app.py Gradio Space for SynthSentinel AI image detector.
 
 Accepts full-resolution images, tiles into 32×32 patches (matching training
 distribution), classifies each patch, and aggregates into a final verdict.
@@ -116,7 +116,7 @@ def run(image: Image.Image, model_name: str) -> tuple[Image.Image | None, str]:
     patches, positions, w, h = tile_image(image, patch_size=32)
 
     if not patches:
-        return None, f"Image too small — needs at least 32×32 px (got {w}×{h})."
+        return None, f"Image too small needs at least 32×32 px (got {w}×{h})."
 
     probs = predict_patches(model, patches)
     fake_p = probs[:, 0]
@@ -144,7 +144,6 @@ def run(image: Image.Image, model_name: str) -> tuple[Image.Image | None, str]:
     return heatmap, summary
 
 
-# ── UI ────────────────────────────────────────────────────────────────────────
 
 DESCRIPTION = """
 **Binary classifier**: REAL vs AI-generated (FAKE) images.
@@ -154,11 +153,11 @@ aggregates into a final verdict. The patch map shows where the model suspects
 AI generation (red) vs authentic content (green).
 
 **Models trained on**: [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images)
-— 120k images (CIFAR-10 real + Stable Diffusion v1.4 fake).
+ 120k images (CIFAR-10 real + Stable Diffusion v1.4 fake).
 """
 
-with gr.Blocks(title="SynthSentinel — AI Image Detector", theme=gr.themes.Soft()) as demo:
-    gr.Markdown("# SynthSentinel — AI Image Detector")
+with gr.Blocks(title="SynthSentinel AI Image Detector") as demo:
+    gr.Markdown("# SynthSentinel AI Image Detector")
     gr.Markdown(DESCRIPTION)
 
     with gr.Row():
@@ -180,4 +179,4 @@ with gr.Blocks(title="SynthSentinel — AI Image Detector", theme=gr.themes.Soft
 
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(theme=gr.themes.Soft())
